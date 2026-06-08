@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="SmartPlate — פתרונות ניהול חכמים למסעדות. כלים דיגיטליים מקצועיים לניהול עלויות, מלאי ודוחות תפעוליים.">
+  <meta name="keywords" content="ניהול מסעדה, עלות מזון, food cost, מסעדות ישראל, smartplate">
+  <meta property="og:title" content="SmartPlate — פתרונות ניהול למסעדות">
+  <meta property="og:description" content="כלים דיגיטליים מקצועיים לניהול עלויות, מלאי ודוחות תפעוליים">
+  <meta property="og:url" content="https://smartplatebasic.com">
+  <title>SmartPlate — פתרונות ניהול חכמים למסעדות</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --dark: #0f0f1a;
+      --dark2: #1a1a2e;
+      --accent: #e94560;
+      --accent2: #f5a623;
+      --light: #f8f9fc;
+      --gray: #6b7280;
+      --border: #e5e7eb;
+    }
+
+    body {
+      font-family: 'Heebo', sans-serif;
+      background: var(--light);
+      color: var(--dark);
+      direction: rtl;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; right: 0; left: 0;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      z-index: 100;
+      padding: 0 40px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--dark);
+      text-decoration: none;
+      letter-spacing: -0.5px;
+    }
+
+    .logo span { color: var(--accent); }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 32px;
+    }
+
+    nav ul a {
+      text-decoration: none;
+      color: var(--gray);
+      font-size: 15px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    nav ul a:hover { color: var(--dark); }
+
+    .nav-cta {
+      background: var(--accent);
+      color: white !important;
+      padding: 8px 20px;
+      border-radius: 8px;
+      font-weight: 600 !important;
+      transition: opacity 0.2s !important;
+    }
+
+    .nav-cta:hover { opacity: 0.85; }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      background: var(--dark2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 100px 40px 60px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(233,69,96,0.15) 0%, transparent 70%);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+
+    .hero-content { position: relative; z-index: 1; max-width: 720px; }
+
+    .hero-badge {
+      display: inline-block;
+      background: rgba(233,69,96,0.15);
+      color: var(--accent);
+      border: 1px solid rgba(233,69,96,0.3);
+      padding: 6px 16px;
+      border-radius: 100px;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 28px;
+      letter-spacing: 0.5px;
+    }
+
+    .hero h1 {
+      font-size: clamp(36px, 5vw, 60px);
+      font-weight: 800;
+      color: white;
+      line-height: 1.15;
+      margin-bottom: 20px;
+      letter-spacing: -1px;
+    }
+
+    .hero h1 span { color: var(--accent); }
+
+    .hero p {
+      font-size: 18px;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.7;
+      margin-bottom: 40px;
+      font-weight: 300;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: white;
+      padding: 14px 32px;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+
+    .btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.08);
+      color: white;
+      padding: 14px 32px;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: 500;
+      text-decoration: none;
+      border: 1px solid rgba(255,255,255,0.15);
+      transition: background 0.2s;
+    }
+
+    .btn-secondary:hover { background: rgba(255,255,255,0.14); }
+
+    /* PRODUCTS */
+    .products {
+      padding: 100px 40px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-size: clamp(28px, 3vw, 40px);
+      font-weight: 800;
+      color: var(--dark);
+      margin-bottom: 12px;
+      letter-spacing: -0.5px;
+    }
+
+    .section-sub {
+      font-size: 17px;
+      color: var(--gray);
+      margin-bottom: 60px;
+      font-weight: 400;
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+    }
+
+    .product-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 36px 32px;
+      text-decoration: none;
+      color: inherit;
+      transition: box-shadow 0.25s, transform 0.25s, border-color 0.25s;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .product-card:hover {
+      box-shadow: 0 12px 40px rgba(0,0,0,0.09);
+      transform: translateY(-4px);
+      border-color: var(--accent);
+    }
+
+    .product-icon {
+      width: 52px; height: 52px;
+      background: var(--light);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+    }
+
+    .product-card h3 {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--dark);
+    }
+
+    .product-card p {
+      font-size: 15px;
+      color: var(--gray);
+      line-height: 1.65;
+      flex: 1;
+    }
+
+    .product-link {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .product-link::before { content: '←'; font-size: 16px; }
+
+    /* ABOUT */
+    .about {
+      background: var(--dark2);
+      padding: 100px 40px;
+      text-align: center;
+    }
+
+    .about .section-title { color: white; }
+    .about .section-sub { color: rgba(255,255,255,0.5); max-width: 580px; margin: 0 auto 40px; }
+
+    .stats {
+      display: flex;
+      justify-content: center;
+      gap: 60px;
+      flex-wrap: wrap;
+      margin-top: 60px;
+    }
+
+    .stat-item { text-align: center; }
+
+    .stat-number {
+      font-size: 42px;
+      font-weight: 800;
+      color: white;
+    }
+
+    .stat-number span { color: var(--accent); }
+
+    .stat-label {
+      font-size: 14px;
+      color: rgba(255,255,255,0.45);
+      margin-top: 6px;
+      font-weight: 400;
+    }
+
+    /* CONTACT */
+    .contact {
+      padding: 100px 40px;
+      max-width: 600px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .contact-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 48px 40px;
+    }
+
+    .contact-card h3 {
+      font-size: 26px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .contact-card p {
+      color: var(--gray);
+      font-size: 16px;
+      margin-bottom: 32px;
+    }
+
+    .contact-email {
+      display: inline-block;
+      background: var(--light);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 28px;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--dark);
+      text-decoration: none;
+      transition: border-color 0.2s;
+    }
+
+    .contact-email:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    footer .logo { font-size: 18px; }
+
+    footer p {
+      color: var(--gray);
+      font-size: 14px;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 640px) {
+      nav { padding: 0 20px; }
+      nav ul { display: none; }
+      .hero { padding: 100px 24px 60px; }
+      .products { padding: 60px 24px; }
+      .about { padding: 60px 24px; }
+      .stats { gap: 32px; }
+      .contact { padding: 60px 24px; }
+      footer { padding: 24px 20px; flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="logo" href="#">Smart<span>Plate</span></a>
+    <ul>
+      <li><a href="#products">הפתרונות שלנו</a></li>
+      <li><a href="#about">אודות</a></li>
+      <li><a href="#contact" class="nav-cta">צור קשר</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-badge">פתרונות דיגיטליים למסעדנות</div>
+      <h1>ניהול חכם<br>למסעדות <span>מצליחות</span></h1>
+      <p>כלים מקצועיים לניהול עלויות מזון, מלאי ודוחות תפעוליים — כל מה שצריך במקום אחד.</p>
+      <div class="hero-buttons">
+        <a href="#products" class="btn-primary">גלה את הפתרונות</a>
+        <a href="#contact" class="btn-secondary">צור קשר</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCTS -->
+  <section class="products" id="products">
+    <div class="section-label">הפתרונות שלנו</div>
+    <h2 class="section-title">כל הכלים שצריך</h2>
+    <p class="section-sub">פלטפורמות מקצועיות שבנויות במיוחד עבור תעשיית המסעדנות הישראלית</p>
+
+    <div class="products-grid">
+
+      <a href="https://foodcostapp.com" target="_blank" class="product-card">
+        <div class="product-icon">🧾</div>
+        <h3>FoodCostApp</h3>
+        <p>מערכת מתקדמת לניהול עלויות מזון, מעקב חשבוניות וניהול ספקים — בזמן אמת.</p>
+        <div class="product-link">foodcostapp.com</div>
+      </a>
+
+      <a href="https://smartplate.org" target="_blank" class="product-card">
+        <div class="product-icon">📊</div>
+        <h3>SmartPlate Dashboard</h3>
+        <p>דשבורד ניהולי לרשתות מסעדות — מכירות, שכר, עלות מזון ווולט בלחיצה אחת.</p>
+        <div class="product-link">smartplate.org</div>
+      </a>
+
+      <a href="https://smart-plate-basic-copy-c14e4635.base44.app" target="_blank" class="product-card">
+        <div class="product-icon">🎯</div>
+        <h3>Smart DEMO</h3>
+        <p>סביבת הדגמה מלאה — נסה את כל המערכת ללא התחייבות לפני שמתחילים.</p>
+        <div class="product-link">Smart DEMO</div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div class="section-label" style="color: rgba(233,69,96,0.8)">אודות SmartPlate</div>
+    <h2 class="section-title">בנויים עבור מסעדנים</h2>
+    <p class="section-sub">אנחנו מאמינים שכל מסעדן מגיע לנתונים ברורים ומדויקים, בזמן אמת, בלי בירוקרטיה מיותרת.</p>
+
+    <div class="stats">
+      <div class="stat-item">
+        <div class="stat-number">100<span>%</span></div>
+        <div class="stat-label">ענן — אין התקנה</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">24<span>/7</span></div>
+        <div class="stat-label">גישה בכל זמן</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">VAT<span>✓</span></div>
+        <div class="stat-label">חישובי מע"מ אוטומטיים</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <div class="section-label">צור קשר</div>
+    <h2 class="section-title" style="margin-bottom: 0">בואו נדבר</h2>
+
+    <div class="contact-card" style="margin-top: 40px">
+      <h3>מעוניינים להצטרף?</h3>
+      <p>נשמח לשמוע מכם ולהתאים את הפתרון המדויק עבור העסק שלכם.</p>
+      <a href="mailto:office@smartplate.biz" class="contact-email">office@smartplate.biz</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <a class="logo" href="#">Smart<span>Plate</span></a>
+    <p>© 2026 SmartPlate. כל הזכויות שמורות.</p>
+  </footer>
+
+</body>
+</html>
